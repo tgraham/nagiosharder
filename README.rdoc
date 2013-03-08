@@ -43,6 +43,21 @@ Here's some examples to get you started with the Ruby API:
   # or get the details for a single service group
   site.service_status(:group => "AWESOME")
 
+  # get today's alert history for all hosts and services
+  site.alert_history
+  
+  # or today's alerts for a specific host
+  site.alert_history(:host => 'myhost')
+  
+  # and today's alerts for a specific state (soft|hard), default is all
+  site.alert_history(:state_type => :hard)
+  
+  # and today's alerts for a specific alert type, can be host or service but not both, default is all
+  site.alert_history(:type => :host_down)
+  
+  # and get previous day's alert history archives (count is days ago, 1 being yesterday and so on)
+  site.alert_history(:host => 'myhost', :state_type => :hard, :type => :host_down, :archive => 1)
+  
   # schedule a host to have services checks run again right now
   site.schedule_service_check('myhost', 'myservice')
 
